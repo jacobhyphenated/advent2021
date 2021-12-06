@@ -7,6 +7,7 @@ mod day2;
 mod day3;
 mod day4;
 mod day5;
+mod day6;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -45,6 +46,15 @@ fn main() {
             println!("Part 1 in {}ms", now.elapsed().as_millis());
             let now = Instant::now();
             println!("Part 2: Overlapping Vents = {}", day5::count_all_overlaps(&lines));
+            println!("Part 2 in {}ms", now.elapsed().as_millis());
+        }
+        if day == "day6" {
+            let fish = day6::read_input();
+            let now = Instant::now();
+            println!("Part 1: total fish (80 days) = {}", day6::calc_growth(&fish, 80));
+            println!("Part 1 in {}ms", now.elapsed().as_millis());
+            let now = Instant::now();
+            println!("Part 2: total fish (256 days) = {}", day6::model_growth(&fish, 256));
             println!("Part 2 in {}ms", now.elapsed().as_millis());
         }
     }

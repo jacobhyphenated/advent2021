@@ -56,7 +56,7 @@ pub fn count_straight_overlaps(lines: &Vec<LineSegment>) -> usize {
  * Part 2
  * Struggled accomplishing some of the ideas I had.
  * Tried to do range iterators, but couldn't get the types to work right (range and range.rev() are different types)
- * Ownership with `current` and the grid were tricky to, making the while loop awkward.
+ * Ownership with `current` and the grid were tricky too, making the while loop awkward.
  * 
  *      Loop through all line segments
  *          Find the next point by incrementing or decrenting x and y if necessary

@@ -1,11 +1,12 @@
 use std::env;
 use std::process;
+use std::time::Instant;
 
-mod codewars;
-mod day3_old;
 mod day1;
 mod day2;
 mod day3;
+mod day4;
+mod day5;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -17,9 +18,6 @@ fn main() {
     }
     let days = &args[1..];
     for day in days {
-        if day == "codewars" {
-
-        }
         if day == "day1" {
             let depths = day1::read_depths();
             println!("Part 1: {} increases", day1::count_increases(&depths));
@@ -33,6 +31,21 @@ fn main() {
         if day == "day3" {
             let diag = day3::read_diagnostic();
             println!("Part 1: Power = {}", day3::power(&diag));
+            println!("Part 2: Life Support = {}", day3::life_support(&diag));
+        }
+        if day == "day4" {
+            let (boards, draws) = day4::read_input();
+            println!("Part 1: winning score = {}", day4::first_winner_score(boards.clone(), &draws));
+            println!("Part 2: last winner = {}", day4::last_winner_score(boards.clone(), &draws));
+        }
+        if day == "day5" {
+            let lines = day5::read_data();
+            let now = Instant::now();
+            println!("Part 1: Overlapping Vents (straight lines only) = {}", day5::count_straight_overlaps(&lines));
+            println!("Part 1 in {}ms", now.elapsed().as_millis());
+            let now = Instant::now();
+            println!("Part 2: Overlapping Vents = {}", day5::count_all_overlaps(&lines));
+            println!("Part 2 in {}ms", now.elapsed().as_millis());
         }
     }
 }

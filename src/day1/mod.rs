@@ -19,19 +19,7 @@ pub fn count_increases(depths: &Vec<i32>) -> i32 {
     })
 }
 
-// use a reducer on a rolling 3 value window
-// Accumulator is a tuple of (number of increases, sum of previous 3 value window)
 pub fn count_rolling(depths: &Vec<i32>) -> i32 {
-    depths.windows(3).fold((0, depths[0] + depths[1] + depths[2]), |(increases, last), slice| {
-        let current: i32 = slice.iter().sum();
-        (
-            if current > last { increases +1 } else { increases },
-            current
-        )
-    }).0
-}
-
-pub fn count_rolling2(depths: &Vec<i32>) -> i32 {
     let mut increases = 0;
     let mut previous: Option<i32> = None;
     for slice in  depths.windows(3) {

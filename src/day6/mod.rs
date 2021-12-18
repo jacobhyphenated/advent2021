@@ -16,11 +16,14 @@ use std::fs;
 use std::collections::HashMap;
 
 /**
- * Part 1: Brute force through the days (~350ms) 
+ * Part 1: Brute force (~350ms) 
+ *      loop one day at a time, updating the counters for each fish
+ *      and add new fish when required.
  */
 pub fn calc_growth(fish: &Vec<i32>, days: usize) -> usize {
     let mut fish = fish.clone();
     for _ in 0..days {
+        // use index for loop because mutating vector values inside a for-each is very hard
         for i in 0..fish.len() {
             fish[i] -= 1;
             if fish[i] < 0 {
@@ -85,7 +88,7 @@ mod tests {
     #[test]
     fn test_model_growth() {
         let init = vec![3,4,3,1,2];
-        assert_eq!(5934, model_growth(&init, 80));
+        assert_eq!(26984457539, model_growth(&init, 256));
     }
 
 }

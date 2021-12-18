@@ -8,6 +8,17 @@ mod day3;
 mod day4;
 mod day5;
 mod day6;
+mod day7;
+mod day8;
+mod day9;
+mod day10;
+mod day11;
+mod day12;
+mod day13;
+mod day14;
+mod day15;
+mod day16;
+mod day17;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -22,7 +33,7 @@ fn main() {
         if day == "day1" {
             let depths = day1::read_depths();
             println!("Part 1: {} increases", day1::count_increases(&depths));
-            println!("Part 2: {} increases using 3 value rolling average", day1::count_rolling2(&depths));
+            println!("Part 2: {} increases using 3 value rolling average", day1::count_rolling(&depths));
         }
         if day == "day2" {
             let commands = day2::read_commands();
@@ -52,10 +63,106 @@ fn main() {
             let fish = day6::read_input();
             let now = Instant::now();
             println!("Part 1: total fish (80 days) = {}", day6::calc_growth(&fish, 80));
-            println!("Part 1 in {}ms", now.elapsed().as_millis());
+            println!("Part 1 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
             let now = Instant::now();
             println!("Part 2: total fish (256 days) = {}", day6::model_growth(&fish, 256));
-            println!("Part 2 in {}ms", now.elapsed().as_millis());
+            println!("Part 2 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+        }
+        if day == "day7" {
+            let subs = day7::read_input();
+            let now = Instant::now();
+            println!("Part 1: linear gas = {}", day7::linear_gas(&subs));
+            println!("Part 1 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+            let now = Instant::now();
+            println!("Part 2: exponential gas = {}", day7::exponential_gas(&subs));
+            println!("Part 2 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+        }
+        if day == "day8" {
+            let segments = day8::read_data();
+            let now = Instant::now();
+            println!("Part 1: number of known digits = {}", day8::count_known_values(&segments));
+            println!("Part 1 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+            let now = Instant::now();
+            println!("Part 2: decode seven segments = {}", day8::decode_values(&segments));
+            println!("Part 2 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+        }
+        if day == "day9" {
+            let grid = day9::read_grid();
+            let now = Instant::now();
+            println!("Part 1: low point risk score = {}", day9::count_low_points(&grid));
+            println!("Part 1 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+            let now = Instant::now();
+            println!("Part 2: 3 largest basins = {}", day9::find_basins(&grid));
+            println!("Part 2 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+        }
+        if day == "day10" {
+            let lines = day10::read_lines();
+            let (illegal_score, incomplete_score) = day10::syntax_score(&lines);
+            println!("Part 1: illegal line score = {}", illegal_score);
+            println!("Part 2: completion line score = {}", incomplete_score);
+        }
+        if day == "day11" {
+            let octopi = day11::read_octopi();
+            println!("Part 1: bursts after 100 steps = {}", day11::flash_after_steps(&octopi, 100));
+            println!("Part 2: step when all burst = {}", day11::find_all_flash(&octopi));
+        }
+        if day == "day12" {
+            let graph = day12::read_paths();
+            let now = Instant::now();
+            println!("Part 1: all possible paths = {}", day12::count_total_paths(&graph));
+            println!("Part 1 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+            let now = Instant::now();
+            println!("Part 2: all paths allowing double visit to small cave = {}", day12::count_paths_visit_twice(&graph));
+            println!("Part 2 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+        }
+        if day == "day13" {
+            let (dots, instructions) = day13::read_data();
+            let now = Instant::now();
+            println!("Part 1: dots after one fold = {}", day13::dots_one_fold(&dots, &instructions[0]));
+            println!("Part 1 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+            let now = Instant::now();
+            let after_folds = day13::fold_all(&dots, &instructions);
+            println!("Day 2");
+            for row in after_folds {
+                for value in row.iter().map(|&val| if val {'#'} else {' '}) {
+                    print!("{}", value);
+                }
+                println!("");
+            }
+            println!("Part 2 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+        }
+        if day == "day14" {
+            let (template, pair_insertion) = day14::read_polymer_data();
+            let now = Instant::now();
+            println!("Part 1: common polymers = {}", day14::common_polymers(&template, &pair_insertion, 10));
+            println!("Part 1 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+            let now = Instant::now();
+            println!("Part 2: use pair based polymer count = {}", day14::polymers_as_pairs(&template, &pair_insertion, 40));
+            println!("Part 2 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+        }
+        if day == "day15" {
+            let grid = day15::read_grid();
+            let now = Instant::now();
+            println!("Part 1: Lowest risk path = {}", day15::dijkstra(&grid));
+            println!("Part 1 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+            let now = Instant::now();
+            let expanded = day15::expand_grid(&grid);
+            println!("Part 2: Expanded risk path cost = {}", day15::dijkstra(&expanded));
+            println!("Part 2 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+        }
+        if day == "day16" {
+            let packet = day16::read_packet();
+            println!("Part 1: count version numbers = {}", packet.count_version());
+            println!("Part 2: calculate packet value = {}", packet.calculate());
+        }
+        if day == "day17" {
+            let target_area = day17::read_target_area();
+            let now = Instant::now();
+            println!("Part 1: highest possible height = {}", day17::highest_possible(&target_area));
+            println!("Part 1 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+            let now = Instant::now();
+            println!("Part 2: total number of velocities = {}", day17::all_possible_velocities(&target_area));
+            println!("Part 2 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
         }
     }
 }

@@ -19,6 +19,9 @@ mod day14;
 mod day15;
 mod day16;
 mod day17;
+mod day18;
+mod day19;
+mod day20;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -163,6 +166,29 @@ fn main() {
             let now = Instant::now();
             println!("Part 2: total number of velocities = {}", day17::all_possible_velocities(&target_area));
             println!("Part 2 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+        }
+        if day == "day18" {
+            let numbers = day18::read_input();
+            let now = Instant::now();
+            let sum = day18::add_all(numbers);
+            println!("Part 1: final sum magnitude = {}", sum.borrow().magnitude());
+            println!("Part 1 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+            let now = Instant::now();
+            println!("Part 2: largest combo mangitude = {}", day18::largest_magnitude());
+            println!("Part 2 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+        }
+        if day == "day19" {
+            println!("Not yet implemented");
+        }
+        if day == "day20" {
+            let (image, enhance) = day20::read_data();
+            let now = Instant::now();
+            println!("Part 1: Count after 2 enhance steps = {}", day20::count_after_steps(&image, &enhance, 2));
+            println!("Part 1 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+            let now = Instant::now();
+            println!("Part 2: Count after 50 enhance steps = {}", day20::count_after_steps(&image, &enhance, 50));
+            println!("Part 2 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+
         }
     }
 }

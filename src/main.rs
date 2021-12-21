@@ -22,6 +22,9 @@ mod day17;
 mod day18;
 mod day19;
 mod day20;
+mod day21;
+mod day22;
+mod day23;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -178,7 +181,13 @@ fn main() {
             println!("Part 2 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
         }
         if day == "day19" {
-            println!("Not yet implemented");
+            let scanners = day19::read_input();
+            let now = Instant::now();
+            let (beacons, farthest) = day19::locate_beacons(&scanners);
+            println!("Part 1: total number of beacons = {}", beacons);
+            println!("Part 2: distance between two farthest scanners = {}", farthest);
+            println!("Part 1&2 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+
         }
         if day == "day20" {
             let (image, enhance) = day20::read_data();
@@ -188,7 +197,26 @@ fn main() {
             let now = Instant::now();
             println!("Part 2: Count after 50 enhance steps = {}", day20::count_after_steps(&image, &enhance, 50));
             println!("Part 2 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
-
+        }
+        if day == "day21" {
+            println!("Part 1: play a deterministic game = {}", day21::play_deterministic(6, 3));
+            let now = Instant::now();
+            println!("Part 2: winning player wins in {} universes", day21::dirac_dice(6, 3));
+            println!("Part 2 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+        }
+        if day == "day22" {
+            let steps = day22::read_steps();
+            let now = Instant::now();
+            println!("Part 1: number of cubes on in -50,50 space = {}", day22::cubes_on_50(&steps));
+            println!("Part 1 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+        }
+        if day == "day23" {
+            let now = Instant::now();
+            println!("Part 1: energy used = {}", day23::lowest_energy_solution(&day23::part_1_start()));
+            println!("Part 1 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+            let now = Instant::now();
+            println!("Part 2: energy used = {}", day23::lowest_energy_solution(&day23::part_2_start()));
+            println!("Part 2 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
         }
     }
 }

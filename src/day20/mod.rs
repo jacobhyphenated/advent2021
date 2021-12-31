@@ -22,19 +22,14 @@ use std::fs;
 
 // Parts 1 & 2 - just change the number of steps
 // part 2 runs ~4 seconds
-pub fn count_after_steps(image: &Vec<Vec<bool>>, enhance: &Vec<bool>, steps: usize) -> usize {
-    let enhanced = enhance_steps(&image, &enhance, steps);
-    enhanced.iter().flat_map(|col| col.iter().filter(|&v| *v).collect::<Vec<_>>()).count()
-}
-
 // The trick with the infinite grid is the first and last char in the enhance array
 // in the sample, both are '.' so we can pad out '.' or 'false' on our output grid.
-// but in the puzzle input , ehnance[0] == '#'. Which means that a grid of 9 falses evaluates to true.
+// but in the puzzle input, ehnance[0] == '#'. Which means that a grid of 9 falses evaluates to true.
 // Also, a grid on 9 trues evaluates to false. This means the infinite padding flips from true/false every step.
 // Solve this by considering only the raw input grid + 1 padded row/col in each direction for each step
 // the padding changes from true/false each step if the enhance vector is true in the 0 place.
 // For each step, expand our search area by one row and one column in all directions. 
-fn enhance_steps(image: &Vec<Vec<bool>>, enhance: &Vec<bool>, steps: usize) -> Vec<Vec<bool>> {
+pub fn count_after_steps(image: &Vec<Vec<bool>>, enhance: &Vec<bool>, steps: usize) -> usize {
     let mut pad = enhance[0];
     let mut pad_len = steps;
     let mut enhanced = pad_grid(image, steps);
@@ -43,7 +38,7 @@ fn enhance_steps(image: &Vec<Vec<bool>>, enhance: &Vec<bool>, steps: usize) -> V
         pad = if enhance[0] { !pad } else { pad };
         pad_len -= 1;
     }
-    enhanced
+    enhanced.iter().flat_map(|col| col.iter().filter(|&v| *v).collect::<Vec<_>>()).count()
 }
 
 // pad specifies if the outer infinity padding should be true or false for this step

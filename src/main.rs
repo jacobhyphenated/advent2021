@@ -25,6 +25,7 @@ mod day20;
 mod day21;
 mod day22;
 mod day23;
+mod day24;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -217,6 +218,17 @@ fn main() {
             let now = Instant::now();
             println!("Part 2: energy used = {}", day23::lowest_energy_solution(&day23::part_2_start()));
             println!("Part 2 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+        }
+        if day == "day24" {
+            let instructions = day24::read_instructions();
+            let largest = "92928914999991";
+            if day24::validate_modal_number(largest, &instructions) {
+                println!("Part 1: Largest valid number = {}", largest);
+            }
+            let smallest = "91811211611981";
+            if day24::validate_modal_number(smallest, &instructions) {
+                println!("Part 1: Smallest valid number = {}", smallest);
+            }
         }
     }
 }

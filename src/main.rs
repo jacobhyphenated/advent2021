@@ -26,6 +26,7 @@ mod day21;
 mod day22;
 mod day23;
 mod day24;
+mod day25;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -229,6 +230,10 @@ fn main() {
             if day24::validate_modal_number(smallest, &instructions) {
                 println!("Part 1: Smallest valid number = {}", smallest);
             }
+        }
+        if day == "day25" {
+            let grid = day25::read_grid();
+            println!("Part 1: step when nothing moves = {}", day25::find_stable_step(&grid));
         }
     }
 }

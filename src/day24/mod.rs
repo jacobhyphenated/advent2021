@@ -232,14 +232,4 @@ mod tests {
             println!("input = {}, z = {}", i, alu.z);
         }
     }
-
-    #[test]
-    fn test_verify_model_single() {
-        let instructions = read_instructions();
-        let input: Vec<i64> = "91811211611981".chars().map(|c| c.to_digit(10).unwrap() as i64).collect();
-        let mut alu = ALU::new(Box::new(input.into_iter()));
-        execute_instruction(&mut alu, &instructions);
-        println!("z = {}", alu.z);
-    }
-
 }

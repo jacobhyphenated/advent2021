@@ -106,13 +106,14 @@ step 4 is our first div z 26 step.
     z = (26z2 + (i3 + 7)) / 26 = z2 = 26z1 + i2 + 11
         Note that (i3 + 7) / 26 = 0 as i3 + 7 is always less than 26 and we truncate the division
 
-After step 4 we can create two logical rules:
+After step 4 we can create two logical rules to fulfill the requirement that i4 = i3 + 7:
     i3 must be 8 or 9
     i4 must be i3 minus 7
 
 Proceed for the remaining steps creating logical rules like this as we go
-This greatly restricts the number of valid modal numbers and the min/max can be
-figured out by applying largest/smallest values allowed within the rules for each digit.
+This greatly restricts the number of valid modal numbers
+and the min/max can be figured out by applying largest/smallest values
+allowed within the rules for each digit.
 
 Final rules are as follows:
     i1 must be 9
@@ -132,11 +133,11 @@ Final rules are as follows:
 pub fn validate_modal_number(modal_number: &str, instructions: &Vec<Instruction>) -> bool {
     let input: Vec<i64> = modal_number.chars().map(|c| c.to_digit(10).unwrap() as i64).collect();
     let mut alu = ALU::new(Box::new(input.into_iter()));
-    execute_instruction(&mut alu, &instructions);
+    execute_instructions(&mut alu, &instructions);
     return alu.z == 0;
 }
 
-fn execute_instruction(alu: &mut ALU, instructions: &Vec<Instruction>) {
+fn execute_instructions(alu: &mut ALU, instructions: &Vec<Instruction>) {
     for instruction in instructions {
         alu.execute(instruction);
     }
@@ -173,11 +174,11 @@ mod tests {
         let instructions = parse_instructions(input);
 
         let mut alu = ALU::new(Box::new(vec![22,66].into_iter()));
-        execute_instruction(&mut alu, &instructions);
+        execute_instructions(&mut alu, &instructions);
         assert_eq!(1, alu.z);
 
         let mut alu = ALU::new(Box::new(vec![22,51].into_iter()));
-        execute_instruction(&mut alu, &instructions);
+        execute_instructions(&mut alu, &instructions);
         assert_eq!(0, alu.z);
     }
 
@@ -197,7 +198,7 @@ mod tests {
         let instructions = parse_instructions(input);
 
         let mut alu = ALU::new(Box::new(vec![5].into_iter()));
-        execute_instruction(&mut alu, &instructions);
+        execute_instructions(&mut alu, &instructions);
         assert_eq!(1, alu.z);
         assert_eq!(0, alu.y);
         assert_eq!(1, alu.x);
@@ -228,7 +229,7 @@ mod tests {
         let instructions = parse_instructions(input);
         for i in 1..=9 {
             let mut alu = ALU::new(Box::new(vec![i].into_iter()));
-            execute_instruction(&mut alu, &instructions);
+            execute_instructions(&mut alu, &instructions);
             println!("input = {}, z = {}", i, alu.z);
         }
     }

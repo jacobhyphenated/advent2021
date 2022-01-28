@@ -79,12 +79,13 @@ pub fn polymers_as_pairs(template: &str, pair_insertion: &HashMap<String, char>,
     });
 
     for _ in 0..steps {
-        // We start with our existing cout of pairs
+        // We start with our existing count of pairs
         pair_count = pair_count.into_iter().fold(HashMap::new(), |mut map, (pair, count)|{
             // Turn each pair into two new pairs
             let new_pairs = pair_map.get(&pair).unwrap();
             for p in new_pairs {
-                // Each pair gets the original pair's count added to that pair's new total
+                // Each new pair gets the original pair's count added to that pair's new total
+                // Ex. if there were 14 CH, then we add 14 to CB and 14 to BH
                 *map.entry(p.to_string()).or_insert(0) += count;
             }
             map

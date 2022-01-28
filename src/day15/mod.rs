@@ -10,7 +10,6 @@ Part 1: What is the lowest risk of any path from the top left to the bottom righ
 
 Part 2: The cave is actually 5 times larger. The current grid repeats downward and to the right,
 but each time it repeats the risk scores are 1 higher. If a risk score would exceed 9, it becomes 1.
-
 */
 
 use std::cmp;

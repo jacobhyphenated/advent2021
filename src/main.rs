@@ -211,6 +211,9 @@ fn main() {
             let now = Instant::now();
             println!("Part 1: number of cubes on in -50,50 space = {}", day22::cubes_on_50(&steps));
             println!("Part 1 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
+            let now = Instant::now();
+            println!("Part 2: total number of cubes on = {}", day22::all_cubes_on(&steps));
+            println!("Part 2 in {}ms", now.elapsed().as_nanos() as f64 / 1000_000.0);
         }
         if day == "day23" {
             let now = Instant::now();

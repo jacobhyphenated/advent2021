@@ -83,7 +83,7 @@ All steps have this sequence:
     eql x w
     eql x 0
 To avoid adding extra y values to the z register, we need to get x == w (the input)
-x will be z % 26 - and parts of z are multipled previously by 26, allowing us to truncate that part
+x will be "z % 26" and parts of z are multipled previously by 26, allowing us to truncate that part
 
 For steps where it is not possible to get x == w:
     z = 26z + w + <n2>
@@ -95,9 +95,9 @@ after step 1, z = i1 + 4 (where i1 is the input digit w for step 1)
 step 2 has 
     <n1> 15
     <n2> 11
-    z = 26z1 + i2 + 11
+    z2 = 26z1 + i2 + 11
 
-after step 3, z = 26z2 + i3 + 7
+after step 3, z3 = 26z2 + i3 + 7
 
 step 4 is our first div z 26 step.
     <n1> -14
@@ -203,34 +203,5 @@ mod tests {
         assert_eq!(0, alu.y);
         assert_eq!(1, alu.x);
         assert_eq!(0, alu.w);
-    }
-
-
-    #[test]
-    fn test_model_first_round_only() {
-        let input = "inp w
-            mul x 0
-            add x z
-            mod x 26
-            div z 1
-            add x 12
-            eql x w
-            eql x 0
-            mul y 0
-            add y 25
-            mul y x
-            add y 1
-            mul z y
-            mul y 0
-            add y w
-            add y 4
-            mul y x
-            add z y";
-        let instructions = parse_instructions(input);
-        for i in 1..=9 {
-            let mut alu = ALU::new(Box::new(vec![i].into_iter()));
-            execute_instructions(&mut alu, &instructions);
-            println!("input = {}, z = {}", i, alu.z);
-        }
     }
 }

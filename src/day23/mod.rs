@@ -378,7 +378,6 @@ fn next_move(burrow: &Burrow, energy: i32, completed_cost: &mut HashSet<i32>) {
                         next_burrow.rooms[Burrow::room_index(&amphipod_type)][space] = None;
                         next_burrow.rooms[Burrow::room_index(amphipod)][farthest_open] = Some(amphipod.clone());
                         if next_burrow.is_complete() {
-                            println!("Completed! {}", energy + move_cost);
                             completed_cost.insert(energy + move_cost);
                             return;
                         }

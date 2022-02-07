@@ -35,9 +35,6 @@ pub fn find_stable_step(grid: &Vec<Vec<Location>>) -> usize {
     let mut step = 1;
     while do_step(&mut grid) != 0 {
         step += 1;
-        if step % 10 == 0 {
-            println!("step {}", step);
-        }
     }
     return step;
 }

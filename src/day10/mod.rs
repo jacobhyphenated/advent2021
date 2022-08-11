@@ -1,4 +1,22 @@
+/*
+Day 10: Syntax Scoring
 
+Each line is composed of nested chunks. A chunk must eventually have a corresponding close character:
+(, [, {, < are all valid open characters.
+A corrupted line has the wrong closing character.
+An incomplete line is missing one or more closing characters at the end
+
+Part 1: Find all the corrupted lines and give them a score based on the first illegal character:
+): 3 points, ]: 57 points, }: 1197 points, >: 25137 points. What is the total error score?
+
+Part 2: Discard the corrupted lines, the remaining lines are incomplete.
+Find the correct closing characters to complete the line in the correct order.
+Using scores ): 1, ]: 2, }: 3, >: 4
+For each character, take the score (starting with 0) and multiple by 5, then add the points for the character.
+Sort the scores. What is the middle score?
+
+
+*/
 use std::collections::HashMap;
 use std::fs;
 

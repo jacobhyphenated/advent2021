@@ -17,11 +17,12 @@ pub fn calc_position(commands: &Vec<String>) -> i32 {
     for command in commands {
         let parts: Vec<&str> = command.split_whitespace().collect();
         let value: i32 = parts[1].parse().unwrap();
+        let (x,y) = position;
         position = match parts[0] {
-            "forward" => (position.0 + value, position.1),
-            "down" => (position.0, position.1 + value),
-            "up" => (position.0, position.1 - value),
-            _ => (position.0, position.1)
+            "forward"   => (x + value, y),
+            "down"      => (x, y + value),
+            "up"        => (x, y - value),
+            _           => (x, y)
         }
     }
     return position.0 * position.1;

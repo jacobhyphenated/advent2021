@@ -15,7 +15,7 @@ use std::fs;
 // compare the current value to previous value to increment the accumulator
 pub fn count_increases(depths: &Vec<i32>) -> i32 {
     depths.windows(2).fold(0, |increases, slice| {
-        if slice[1] > slice[0] { increases + 1} else { increases }
+        if slice[1] > slice[0] { increases + 1 } else { increases }
     })
 }
 
@@ -23,7 +23,7 @@ pub fn count_rolling(depths: &Vec<i32>) -> i32 {
     let mut increases = 0;
     let mut previous: Option<i32> = None;
     for slice in  depths.windows(3) {
-        let current: i32 = slice.iter().sum();
+        let current = slice.iter().sum();
         if current > previous.unwrap_or(current) {
             increases += 1;
         }

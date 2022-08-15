@@ -63,7 +63,7 @@ impl Cuboid {
             && cmp::min(self.z_max, other.z_max) >= cmp::max(self.z_min, other.z_min);
     }
 
-    // Given two cuboids, subtract the area of the other cube from self
+    // Given two cuboids, subtract the intersecting area of the other cube from self
     // then return a list of cuboids comprising the remaining area of what used to be self.
     // If the two cuboids do not intersect, just return a vector containing self.
     // This splits self up along each possible intersecting dimension, a total of 6 possible slices.

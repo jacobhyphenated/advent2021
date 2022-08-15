@@ -216,12 +216,10 @@ fn add(lhs: SnailNumber, rhs: SnailNumber) -> SnailNumber {
 // Do the reducing steps in a loop until no more steps are required
 fn reduce(number: SnailNumber) -> SnailNumber {
     loop {
-        let n = number.clone();
-        if explode(n) {
+        if explode(number.clone()) {
             continue;
         }
-        let n = number.clone();
-        if split(n) {
+        if split(number.clone()) {
             continue;
         }
         break;
@@ -253,8 +251,8 @@ fn explode(number: SnailNumber) -> bool {
         return true;
     }
     else {
-        return explode(number.borrow().left_unwrap().clone())
-            || explode(number.borrow().right_unwrap().clone());
+        return explode(number.borrow().left_unwrap())
+            || explode(number.borrow().right_unwrap());
     }
 }
 

@@ -22,7 +22,7 @@ pub struct Tile {
 
 impl Tile {
     fn new(number: i32) -> Tile {
-        Tile {number: number, called: false}
+        Tile {number, called: false}
     }
 
     fn mark(&mut self) {

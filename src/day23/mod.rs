@@ -287,6 +287,7 @@ fn next_move(burrow: &Burrow, energy: i32, completed_cost: &mut HashSet<i32>) {
             for space in start..=end {
                 if let Some(_) = burrow.hallway[space] {
                     clear_path = false;
+                    break;
                 }
             }
             if !clear_path {
@@ -304,13 +305,6 @@ fn next_move(burrow: &Burrow, energy: i32, completed_cost: &mut HashSet<i32>) {
 
             // calculate movement cost
             let move_cost = ((i as i32 - entryway as i32).abs() + farthest_open as i32 + 1) * amphipod.energy();
-            if let Some(min) = completed_cost.iter().min() {
-                if min <= &(energy + move_cost) {
-                    // we already have a better solution to the problem, stop here
-                    return;
-                }
-            }
-
             // Clone the burrow and make the moves
             let mut next_burrow = burrow.clone();
             next_burrow.hallway[i] = None;
@@ -321,6 +315,7 @@ fn next_move(burrow: &Burrow, energy: i32, completed_cost: &mut HashSet<i32>) {
                 return;
             }
             next_move(&next_burrow, energy + move_cost, completed_cost);
+            return;
         }
     }
 
@@ -382,9 +377,7 @@ fn next_move(burrow: &Burrow, energy: i32, completed_cost: &mut HashSet<i32>) {
                             return;
                         }
                         next_move(&next_burrow, energy + move_cost, completed_cost);
-                        // no need to enumerate other possible moves
-                        // a move to the correct final room is always the best move from this burrow state
-                        continue;
+                        return;
                     }
                 }
 

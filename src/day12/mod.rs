@@ -81,7 +81,7 @@ fn recurse_paths<'a>(root: &'a Cave, path: &Vec<&'a Cave>, graph: &'a HashMap<Ca
         return Some(vec![current_path])
     }
 
-    // filter_amp removes Nones - those paths are dead ends
+    // filter_map removes Nones - those paths are dead ends
     // flat map to reduce back to a list of "paths", rather than a list of list of paths.
     Some(graph.get(root).unwrap().iter()
         .filter_map(|adjacent| recurse_paths(adjacent, &current_path, &graph, double_pass))
